@@ -1,3 +1,5 @@
+// see https://warpspire.com/posts/taste
+// also see https://ben.balter.com/2015/08/12/the-zen-of-github/
 const zenurl = "https://api.github.com/zen";
 
 function appendQuote() {
