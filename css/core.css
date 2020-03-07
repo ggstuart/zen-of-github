@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  background-color: #066;
+  color: white;
+  font-family: monospace;
+  font-size: 1.2em;
+}
+
+section {
+  background-color: #077;
+}
+
+article {
+  padding: 1em;
+  border-bottom: 1px solid #099;
+}
