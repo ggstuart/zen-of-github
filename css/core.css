@@ -30,6 +30,7 @@ header {
 
 header h1 {
   margin: 0;
+  font-size: 1.2em;
 }
 
 header div {
@@ -39,10 +40,8 @@ header div {
 
 header button {
   white-space: nowrap;
-  margin: 0.2em;
-  padding: 0.25em 1em;
   width: 100%;
-  border: none;
+  border: 1px solid hsl(var(--hue), 100%, 10%);
   color: hsl(var(--hue), 100%, 10%);
   background-color: hsl(var(--hue), 100%, 90%);
   box-sizing: border-box;
@@ -57,11 +56,10 @@ article {
   width: 100%;
   max-width: 800px;
   top: 150vh;
-  padding: 2em 1em;
+  padding: 1em;
   height: 15vh;
   box-sizing: border-box;
   transition: .75s;
-  font-size: 1.5em;
   font-weight: bold;
   animation: fadeIn 2s;
 }
@@ -167,7 +165,7 @@ article:nth-child(8) {
   100% {opacity: 1}
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
   header {
     flex-direction: row;
   }
@@ -176,5 +174,8 @@ article:nth-child(8) {
   }
   #modalContent {
     font-size: 3em;
+  }
+  article {
+    font-size: 1.5em;
   }
 }
