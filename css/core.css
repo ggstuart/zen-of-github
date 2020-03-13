@@ -63,6 +63,7 @@ article {
   transition: .75s;
   font-size: 1.5em;
   font-weight: bold;
+  animation: fadeIn 2s;
 }
 
 
@@ -140,9 +141,30 @@ article:nth-child(8) {
 #modalContent {
   font-size: 2em;
   background-color: hsla(var(--hue), 100%, 90%, 0.8);
-  color: hsla(var(--hue), 100%, 10%, 0.8);
+  color: hsl(var(--hue), 100%, 10%);
   padding: 1em;
   border-radius: 0.2em;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsla(var(--hue), 100%, 90%, 0.5);
+  color: hsl(var(--hue), 100%, 10%);
+  font-size: 2em;
+  padding: 1em;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0}
+  100% {opacity: 1}
 }
 
 @media screen and (min-width: 600px) {

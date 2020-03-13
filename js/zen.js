@@ -2,22 +2,39 @@
 // also see https://ben.balter.com/2015/08/12/the-zen-of-github/
 const zenurl = "https://api.github.com/zen";
 const quotes = JSON.parse(localStorage.getItem('quotes')) || [];
+const loadingIndicator = document.createElement('div');
+loadingIndicator.classList.add('loading');
+loadingIndicator.textContent = 'loading...';
 
 async function initialise() {
-  await harvestQuotes(8);
   articles = quotes.map(buildQuote);
   articles.forEach(a => zen.appendChild(a));
+  document.documentElement.appendChild(loadingIndicator);
+  await harvestQuotes(8);
+  document.documentElement.removeChild(loadingIndicator);
 }
 
 async function harvestQuotes(n) {
   while(quotes.length < n) {
-    quote = await getQuote();
-    saveQuote(quote);
+    try {
+      quote = await getQuote()
+      saveQuote(quote);
+      zen.appendChild(buildQuote(quote));
+    }
+    catch(error) {
+      zen.appendChild(buildQuote(error.message));
+      showModal(error.message);
+      break;
+    };
   }
 }
 
 async function getQuote() {
   response = await fetch(zenurl);
+  if(!response.ok) {
+    error = await response.json();
+    throw error;
+  }
   return response.text();
 }
 
@@ -44,7 +61,11 @@ function rotate() {
 async function modalQuote() {
   quote = await getQuote();
   saveQuote(quote);
-  modalContent.textContent = quote;
+  showModal(quote);
+}
+
+function showModal(text) {
+  modalContent.textContent = text;
   modal.classList.toggle('visible');
 }
 
