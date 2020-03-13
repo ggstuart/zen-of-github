@@ -4,24 +4,19 @@ const zenurl = "https://api.github.com/zen";
 const quotes = JSON.parse(localStorage.getItem('quotes')) || [];
 
 async function initialise() {
-  await harvestQuotes(10);
-  console.log(quotes.length);
-  console.log(quotes);
+  await harvestQuotes(7);
   articles = quotes.map(buildQuote);
   articles.forEach(a => zen.appendChild(a));
 }
 
 async function harvestQuotes(n) {
   while(quotes.length < n) {
-    console.log(`${quotes.length} quotes < ${n}`);
     quote = await getQuote();
     saveQuote(quote);
   }
-  console.log(`got ${quotes.length} quotes`);
 }
 
 async function getQuote() {
-  console.log("requesting quote");
   response = await fetch(zenurl);
   return response.text();
 }
@@ -39,28 +34,26 @@ function buildQuote(quote) {
   return article;
 }
 
-function slide() {
+function rotate() {
   const first = document.querySelector('#zen article:first-child');
   if(first) {
     zen.appendChild(first);
   }
 }
 
-initialise();
-
-download.addEventListener('click', modalQuote);
-modal.addEventListener('click', ev => modal.classList.remove('visible'));
-
 async function modalQuote() {
   quote = await getQuote();
+  saveQuote(quote);
   modalContent.textContent = quote;
   modal.classList.toggle('visible');
 }
-
 
 function randomiseHue() {
   document.documentElement.style.setProperty('--hue', Math.floor(Math.random() * 360));
 }
 
+initialise();
+modal.addEventListener('click', ev => modal.classList.remove('visible'));
 hueBtn.addEventListener('click', randomiseHue);
-nextBtn.addEventListener('click', slide);
+rotateBtn.addEventListener('click', rotate);
+download.addEventListener('click', modalQuote);
