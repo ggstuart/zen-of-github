@@ -4,7 +4,7 @@ const zenurl = "https://api.github.com/zen";
 const quotes = JSON.parse(localStorage.getItem('quotes')) || [];
 
 async function initialise() {
-  await harvestQuotes(7);
+  await harvestQuotes(8);
   articles = quotes.map(buildQuote);
   articles.forEach(a => zen.appendChild(a));
 }
