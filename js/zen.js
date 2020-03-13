@@ -22,7 +22,6 @@ async function harvestQuotes(n) {
       zen.appendChild(buildQuote(quote));
     }
     catch(error) {
-      zen.appendChild(buildQuote(error.message));
       showModal(error.message);
       break;
     };

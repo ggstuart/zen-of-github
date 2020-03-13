@@ -152,8 +152,8 @@ article:nth-child(8) {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: hsla(var(--hue), 100%, 90%, 0.5);
-  color: hsl(var(--hue), 100%, 10%);
+  color: hsl(var(--hue), 100%, 90%);
+  background-color: hsla(var(--hue), 100%, 10%, 0.8);
   font-size: 2em;
   padding: 1em;
   display: flex;
