@@ -1,16 +1,151 @@
-body {
-  margin: 0;
-  background-color: #066;
-  color: white;
-  font-family: monospace;
-  font-size: 1.2em;
+:root {
+  --hue: 0;
 }
 
-section {
-  background-color: #077;
+body {
+  margin: 0;
+  background-color: hsl(var(--hue), 50%, 10%);
+  color: hsl(var(--hue), 100%, 90%);
+  font-family: monospace;
+  text-align: center;
+}
+
+header {
+  padding: 0.5em 1em;
+  height: 10vh;
+  box-sizing: border-box;
+  z-index: 10;
+  background-color: hsl(var(--hue), 100%, 10%);
+  color: hsl(var(--hue), 100%, 90%);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.75s;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header div {
+  display: flex;
+  justify-content: space-between;
+}
+
+header button {
+  white-space: nowrap;
+  margin: 0.2em;
+  padding: 0.25em 1em;
+  width: 100%;
+  border: none;
+  color: hsl(var(--hue), 100%, 10%);
+  background-color: hsl(var(--hue), 100%, 90%);
+  box-sizing: border-box;
 }
 
 article {
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 800px;
+  top: 150vh;
+  padding: 2em 1em;
+  height: 15vh;
+  box-sizing: border-box;
+  transition: .75s;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+
+/* alternating colours */
+article:nth-child(1n) {
+  color: hsl(var(--hue), 50%, 80%);
+  background-color: hsl(var(--hue), 50%, 20%);
+}
+article:nth-child(2n+1) {
+  background-color: hsl(var(--hue), 50%, 80%);
+  color: hsl(var(--hue), 50%, 20%);
+
+}
+
+/* positions are determined absolutely */
+/* Each visible one has a slightly different transition delay */
+
+/* this one is hidden behind the header */
+article:nth-child(1) {
+  z-index: -5;
+  transition-delay: 0;
+  top: -5vh;
+}
+
+/* these are the visible ones */
+article:nth-child(2) {
+  transition-delay: 0.1s;
+  top: 10vh;
+}
+article:nth-child(3) {
+  transition-delay: 0.2s;
+  top: 25vh;
+}
+article:nth-child(4) {
+  transition-delay: 0.3s;
+  top: 40vh;
+}
+article:nth-child(5) {
+  transition-delay: 0.4s;
+  top: 55vh;
+}
+article:nth-child(6) {
+  transition-delay: 0.5s;
+  top: 70vh;
+}
+article:nth-child(7) {
+  transition-delay: 0.6s;
+  top: 85vh;
+}
+
+/* this one is below the bottom of the screen */
+article:nth-child(8) {
+  top: 100vh;
+}
+
+#modal {
+  z-index: 10;
+  position: absolute;
+  left:0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsla(var(--hue), 100%, 20%, 0.8);
+  padding: 5em 3em;
+  box-sizing: border-box;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal.visible {
+  display: flex;
+}
+
+#modalContent {
+  font-size: 4em;
+  background-color: hsla(var(--hue), 100%, 90%, 0.8);
+  color: hsla(var(--hue), 100%, 10%, 0.8);
   padding: 1em;
-  border-bottom: 1px solid #099;
+  border-radius: 0.2em;
+}
+
+@media screen and (min-width: 600px) {
+  header {
+    flex-direction: row;
+  }
+  header div {
+    align-items: flex-start;
+  }
 }

@@ -1,60 +1,36 @@
 // see https://warpspire.com/posts/taste
 // also see https://ben.balter.com/2015/08/12/the-zen-of-github/
 const zenurl = "https://api.github.com/zen";
+const quotes = JSON.parse(localStorage.getItem('quotes')) || [];
 
-function appendQuote() {
-  try {
-    fetch(zenurl).then(response => {
-      if(response.ok) {
-        return response.text();
-      } else {
-        errorHandler(response);
-      }
-    }).then(successHandler);
-  }
-  catch(error) {
-    console.log(error);
-  }
+async function initialise() {
+  await harvestQuotes(10);
+  console.log(quotes.length);
+  console.log(quotes);
+  articles = quotes.map(buildQuote);
+  articles.forEach(a => zen.appendChild(a));
 }
 
-function errorHandler() {
-  // the error handler raises exceptions based on the reponse object status
-  if (response.status === 403) {
-   console.log(response.text());
-   throw "403 error! Rate limit reached?";
- } else {
-   throw `${reponse.status} ${response.statusText}`
- }
+async function harvestQuotes(n) {
+  while(quotes.length < n) {
+    console.log(`${quotes.length} quotes < ${n}`);
+    quote = await getQuote();
+    saveQuote(quote);
+  }
+  console.log(`got ${quotes.length} quotes`);
 }
 
-// the successHandler processes the quote contained in the successfully fullfilled response
-function successHandler(quote) {
+async function getQuote() {
+  console.log("requesting quote");
+  response = await fetch(zenurl);
+  return response.text();
+}
 
-  // the data are ratelimited so we use local storage to store unique values
-  const quotes = JSON.parse(localStorage.getItem('quotes')) || [];
-
-  // repetition should be filtered out
+function saveQuote(quote) {
   if(!quotes.includes(quote)) {
     quotes.push(quote);
     localStorage.setItem('quotes', JSON.stringify(quotes));
   }
-}
-
-
-
-const quotes = JSON.parse(localStorage.getItem('quotes')) || [];
-for(const quote of quotes) {
-  addQuote(quote);
-}
-
-
-// this function adds a new quote to the rendered HTML (via the DOM)
-// the <section id="zen"> will grow by one <article> each time this is called
-function addQuote(quote) {
-  // we make an object that represents the HTML, including CSS classes and eventhandlers for a quote
-  const quoteObject = buildQuote(quote);
-  // we put it into the zen section built from our HTML 'template'
-  zen.appendChild(quoteObject);
 }
 
 function buildQuote(quote) {
@@ -63,12 +39,28 @@ function buildQuote(quote) {
   return article;
 }
 
-// successHandler("test")
-// successHandler("test")
-// successHandler("test")
-// successHandler("test")
+function slide() {
+  const first = document.querySelector('#zen article:first-child');
+  if(first) {
+    zen.appendChild(first);
+  }
+}
 
-appendQuote();
-appendQuote();
-appendQuote();
-appendQuote();
+initialise();
+
+download.addEventListener('click', modalQuote);
+modal.addEventListener('click', ev => modal.classList.remove('visible'));
+
+async function modalQuote() {
+  quote = await getQuote();
+  modalContent.textContent = quote;
+  modal.classList.toggle('visible');
+}
+
+
+function randomiseHue() {
+  document.documentElement.style.setProperty('--hue', Math.floor(Math.random() * 360));
+}
+
+hueBtn.addEventListener('click', randomiseHue);
+nextBtn.addEventListener('click', slide);
