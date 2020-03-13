@@ -9,9 +9,7 @@ loadingIndicator.textContent = 'loading...';
 async function initialise() {
   articles = quotes.map(buildQuote);
   articles.forEach(a => zen.appendChild(a));
-  document.documentElement.appendChild(loadingIndicator);
   await harvestQuotes(8);
-  document.documentElement.removeChild(loadingIndicator);
 }
 
 async function harvestQuotes(n) {
@@ -29,7 +27,9 @@ async function harvestQuotes(n) {
 }
 
 async function getQuote() {
+  document.documentElement.appendChild(loadingIndicator);
   response = await fetch(zenurl);
+  document.documentElement.removeChild(loadingIndicator);
   if(!response.ok) {
     error = await response.json();
     throw error;
