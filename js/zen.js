@@ -58,9 +58,14 @@ function rotate() {
 }
 
 async function modalQuote() {
-  quote = await getQuote();
-  saveQuote(quote);
-  showModal(quote);
+  try {
+    quote = await getQuote();
+    saveQuote(quote);
+    showModal(quote);
+  }
+  catch(error) {
+    showModal(error.message);
+  }
 }
 
 function showModal(text) {
