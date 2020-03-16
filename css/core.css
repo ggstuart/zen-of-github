@@ -50,8 +50,18 @@ header button {
   box-sizing: border-box;
 }
 
+section {
+  max-width: 800px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+
 article {
-  position: fixed;
+  position: absolute;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -81,13 +91,6 @@ article:nth-child(2n+1) {
 /* positions are determined absolutely */
 /* Each visible one has a slightly different transition delay */
 
-/* this one is hidden behind the header */
-/* article:nth-child(1) {
-  z-index: -5;
-  transition-delay: 0;
-  top: -5vh;
-} */
-
 /* these are the visible ones */
 article:nth-child(1) {
   transition-delay: 0.2s;
@@ -114,9 +117,9 @@ article:nth-child(6) {
   top: 85vh;
 }
 
-/* this one is below the bottom of the screen */
+/* this one is ultimately located below the bottom of the screen */
+/* but it animates first */
 article:last-child {
-  /* transition: 2s; */
   animation: removeArticle 0.2s;
 }
 
@@ -174,7 +177,7 @@ article:last-child {
       left: 0;
   }
   100% {
-    left: -100%;
+    left: -100vw;
     top: 10vh;
       /* top: 100vh; */
   }
