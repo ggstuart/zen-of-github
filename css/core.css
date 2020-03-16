@@ -1,6 +1,7 @@
 :root {
   --hue: 30;
   --dark1: hsl(var(--hue), 100%, 20%);
+  --darkAlpha: hsla(var(--hue), 100%, 20%, 0.95);
   --mid1: hsl(var(--hue), 50%, 50%);
   --light1: hsl(var(--hue), 100%, 80%);
   --dark2: hsl(var(--hue), 100%, 10%);
@@ -53,11 +54,10 @@ article {
   position: fixed;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
-  right: 0;
   width: 100%;
   max-width: 800px;
-  top: 150vh;
+  z-index: -5;
+  top: 100vh;
   padding: 2em;
   height: 15vh;
   box-sizing: border-box;
@@ -82,41 +82,42 @@ article:nth-child(2n+1) {
 /* Each visible one has a slightly different transition delay */
 
 /* this one is hidden behind the header */
-article:nth-child(1) {
+/* article:nth-child(1) {
   z-index: -5;
   transition-delay: 0;
   top: -5vh;
-}
+} */
 
 /* these are the visible ones */
-article:nth-child(2) {
-  transition-delay: 0.1s;
+article:nth-child(1) {
+  transition-delay: 0.2s;
   top: 10vh;
 }
-article:nth-child(3) {
-  transition-delay: 0.2s;
+article:nth-child(2) {
+  transition-delay: 0.3s;
   top: 25vh;
 }
-article:nth-child(4) {
-  transition-delay: 0.3s;
+article:nth-child(3) {
+  transition-delay: 0.4s;
   top: 40vh;
 }
-article:nth-child(5) {
-  transition-delay: 0.4s;
+article:nth-child(4) {
+  transition-delay: 0.5s;
   top: 55vh;
 }
-article:nth-child(6) {
-  transition-delay: 0.5s;
+article:nth-child(5) {
+  transition-delay: 0.6s;
   top: 70vh;
 }
-article:nth-child(7) {
-  transition-delay: 0.6s;
+article:nth-child(6) {
+  transition-delay: 0.7s;
   top: 85vh;
 }
 
 /* this one is below the bottom of the screen */
-article:nth-child(8) {
-  top: 100vh;
+article:last-child {
+  /* transition: 2s; */
+  animation: removeArticle 0.2s;
 }
 
 #modal {
@@ -126,7 +127,7 @@ article:nth-child(8) {
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: hsla(var(--hue), 100%, 10%, 0.8);
+  background-color: var(--darkAlpha);
   color: var(--dark1);
   padding: 1em;
   box-sizing: border-box;
@@ -153,7 +154,7 @@ article:nth-child(8) {
   width: 100vw;
   height: 100vh;
   color: var(--light1);
-  background-color: var(--dark1);
+  background-color: var(--darkAlpha);
   font-size: 2em;
   padding: 1em;
   display: flex;
@@ -165,6 +166,18 @@ article:nth-child(8) {
 @keyframes fadeIn {
   0% {opacity: 0}
   100% {opacity: 1}
+}
+
+@keyframes removeArticle {
+  0% {
+      top: 10vh;
+      left: 0;
+  }
+  100% {
+    left: -100%;
+    top: 10vh;
+      /* top: 100vh; */
+  }
 }
 
 @media screen and (min-width: 500px) {
