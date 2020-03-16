@@ -1,5 +1,5 @@
 :root {
-  --hue: 0;
+  --hue: 30;
   --dark1: hsl(var(--hue), 100%, 20%);
   --mid1: hsl(var(--hue), 50%, 50%);
   --light1: hsl(var(--hue), 100%, 80%);
