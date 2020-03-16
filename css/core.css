@@ -1,5 +1,10 @@
 :root {
   --hue: 0;
+  --dark1: hsl(var(--hue), 100%, 20%);
+  --mid1: hsl(var(--hue), 50%, 50%);
+  --light1: hsl(var(--hue), 100%, 80%);
+  --dark2: hsl(var(--hue), 100%, 10%);
+  --light2: hsl(var(--hue), 100%, 90%);
 }
 
 body, header {
@@ -8,9 +13,7 @@ body, header {
 
 body {
   margin: 0;
-  background-color: hsl(var(--hue), 50%, 10%);
-  color: hsl(var(--hue), 100%, 90%);
-  font-family: monospace;
+  background-color: var(--mid1);
   text-align: center;
 }
 
@@ -19,13 +22,12 @@ header {
   height: 10vh;
   box-sizing: border-box;
   z-index: 10;
-  background-color: hsl(var(--hue), 100%, 10%);
-  color: hsl(var(--hue), 100%, 90%);
+  color: var(--light2);
+  background-color: var(--dark2);
   overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* transition: 0.75s; */
 }
 
 header h1 {
@@ -41,9 +43,9 @@ header div {
 header button {
   white-space: nowrap;
   width: 100%;
-  border: 1px solid hsl(var(--hue), 100%, 10%);
-  color: hsl(var(--hue), 100%, 10%);
-  background-color: hsl(var(--hue), 100%, 90%);
+  color: var(--dark2);
+  background-color: var(--light2);
+  border: 1px solid var(--dark2);
   box-sizing: border-box;
 }
 
@@ -56,24 +58,24 @@ article {
   width: 100%;
   max-width: 800px;
   top: 150vh;
-  padding: 1em;
+  padding: 2em;
   height: 15vh;
   box-sizing: border-box;
   transition: .75s;
-  font-weight: bold;
+  font-family: monospace;
+  font-size: 1.5em;
   animation: fadeIn 2s;
 }
 
 
 /* alternating colours */
 article:nth-child(1n) {
-  color: hsl(var(--hue), 50%, 80%);
-  background-color: hsl(var(--hue), 50%, 20%);
+  color: var(--light1);
+  background-color: var(--dark1);
 }
 article:nth-child(2n+1) {
-  background-color: hsl(var(--hue), 50%, 80%);
-  color: hsl(var(--hue), 50%, 20%);
-
+  background-color: var(--light1);
+  color: var(--dark1);
 }
 
 /* positions are determined absolutely */
@@ -125,6 +127,7 @@ article:nth-child(8) {
   width: 100vw;
   height: 100vh;
   background-color: hsla(var(--hue), 100%, 10%, 0.8);
+  color: var(--dark1);
   padding: 1em;
   box-sizing: border-box;
   display: none;
@@ -139,7 +142,6 @@ article:nth-child(8) {
 #modalContent {
   font-size: 2em;
   background-color: hsla(var(--hue), 100%, 90%, 0.8);
-  color: hsl(var(--hue), 100%, 10%);
   padding: 1em;
   border-radius: 0.2em;
 }
@@ -150,8 +152,8 @@ article:nth-child(8) {
   left: 0;
   width: 100vw;
   height: 100vh;
-  color: hsl(var(--hue), 100%, 90%);
-  background-color: hsla(var(--hue), 100%, 10%, 0.8);
+  color: var(--light1);
+  background-color: var(--dark1);
   font-size: 2em;
   padding: 1em;
   display: flex;
@@ -176,6 +178,6 @@ article:nth-child(8) {
     font-size: 3em;
   }
   article {
-    font-size: 1.5em;
+    font-size: 1.8em;
   }
 }
